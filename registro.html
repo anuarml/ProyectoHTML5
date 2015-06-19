@@ -22,7 +22,7 @@
         </ul>
       </div>
       <div class="logo">
-        <h1><small>I'll make your life sweeter.</small><a href="index.html">Nezzie's<span>Cooking Book</span></a></h1>
+        <h1><small>I'll make your life sweeter.</small><a href="inicio.html">Nezzie's<span>Cooking Book</span></a></h1>
       </div>
       <div class="clr"></div>
     </div>
@@ -33,7 +33,7 @@
         <div class="article">
           <h2>Registrarse</h2>
           <div class="clr"></div>
-          <form action="#" method="post" id="sendemail">
+          <form action="#" method="post" id="sendRegistration">
             <ol>
               <li>
                 <label for="userName">Usuario</label>
@@ -42,6 +42,17 @@
               <li>
                 <label for="password">Contraseña</label>
                 <input id="password" name="password" class="text" type="password"/>
+              </li>
+              <li>
+                <label for="birthDate">Fecha de Nacimiento</label>
+                <input id="birthDate" name="birthDate" class="text" type="date"/>
+              </li>
+              <br>
+              <li>
+                <form>
+                  <span><input type="radio" name="sex" value="male">Hombre</span>
+                  <span><input type="radio" name="sex" value="female">Mujer</span>
+                </form>
               </li>
               <li>
                 <input type="submit" class="send" value="Enviar" />
