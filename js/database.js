@@ -18,7 +18,7 @@ if(!db){
 (function createTables(){
 
     db.transaction(function (tx) {
-    	//tx.executeSql('DROP TABLE IF EXISTS users');
+
     	tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_USERS+' ('+
 			'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
 			'userName VARCHAR(30) NOT NULL UNIQUE,'+
@@ -27,7 +27,26 @@ if(!db){
             'lastName VARCHAR(30) NOT NULL,'+
             'email VARCHAR(60) NOT NULL)'
 		);
-    });             
+        //tx.executeSql('DROP TABLE '+TABLE_POSTS);
+        tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_POSTS+' ('+
+            'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
+            'title VARCHAR(30) NOT NULL UNIQUE,'+
+            'description VARCHAR(300) NOT NULL,'+
+            'teaser VARCHAR(150) NOT NULL,'+
+            'vidLink VARCHAR(100) NOT NULL,'+
+            'imgLink VARCHAR(100) NOT NULL,'+
+            'tag VARCHAR(30) NOT NULL,'+
+            'date DATETIME NOT NULL DEFAULT (datetime(\'now\',\'localtime\')))'
+        );
+
+        tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_COMMENTS+' ('+
+            'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
+            'idPost INTEGER NOT NULL,'+
+            'idUser INTEGER NOT NULL,'+
+            'comment VARCHAR(100) NOT NULL)'
+        );
+
+    });            
 })();
 
 // Obtiene un usuario de la base de datos.
@@ -37,9 +56,23 @@ function getUser(userName, callback, failCallback){
     });     
 }
 
-// Crea un nuevo usuario en la base de datos.
+// Agrega un nuevo usuario en la base de datos.
 function addUser(userName, password, name, lastName, email, callback, failCallback){
     db.transaction(function (tx) {
         tx.executeSql("INSERT INTO "+TABLE_USERS+" (userName, password, name, lastName, email) VALUES (?,?,?,?,?)", [userName,password,name,lastName,email], callback, failCallback);
+    });     
+}
+
+// Obtiene un post de la base de datos.
+function getPost(title, callback, failCallback){
+    db.readTransaction(function (tx) {
+        tx.executeSql("SELECT * FROM "+TABLE_POSTS+" WHERE title=?", [title], callback, failCallback);
+    });     
+}
+
+// Agrega un nuevo post en la base de datos.
+function addPost(title, description, teaser, vidLink, imgLink, tag, callback, failCallback){
+    db.transaction(function (tx) {
+        tx.executeSql("INSERT INTO "+TABLE_POSTS+" (title, description, teaser, vidLink, imgLink, tag) VALUES (?,?,?,?,?,?)", [title, description, teaser, vidLink, imgLink, tag], callback, failCallback);
     });     
 }
