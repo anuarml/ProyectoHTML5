@@ -38,17 +38,27 @@ authentification.login = function(user){
 // Cierra la sesión del usuario
 authentification.logout = function(){
 	storage.deleteItem('user');
-	window.location = 'login.html';
+	window.location = 'inicioSesion.html';
 }
 
-// Si no se tiene una sesión activa redirige al login.
 authentification.verifySession = function(){
 
 	user = storage.getItem('user');
 
 	if(user){
 		var linkSesion = document.getElementById('linkSesion');
-		linkSesion.hidden = "true";
+		linkSesion.hidden = true;
+		var linkCerrarSesion = document.getElementById('linkCerrarSesion');
+		linkCerrarSesion.hidden = false;
+		var greetings = document.getElementById('greetings');
+		greetings.innerHTML = "Hola " + user.name;
+		linkCerrarSesion.style.textAlign = "right";
+		linkCerrarSesion.style.marginRight = "30px";
+		greetings.style.marginRight = "10px";
+		var nuevoPost = document.getElementById('nuevoPost');
+		nuevoPost.hidden = false;
+		//console.log(user.name);
+		//alert("hola");
 		//window.location = 'inicioSesion.html';
 	}
 }

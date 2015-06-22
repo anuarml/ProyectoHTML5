@@ -11,3 +11,7 @@ $(document).ready(function(){
 $('#register').on("click",function(){
 	window.location = "registro.html";
 });
+
+$('#aLogout').on("click",function(){
+	
+});

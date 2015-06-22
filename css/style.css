@@ -12,7 +12,7 @@ html, .main {
 	margin:0;
 }
 .main {
-	background:#4488a7 url(images/main_bg.jpg) no-repeat center top;
+	background:#4488a7 url(../images/main_bg.jpg) no-repeat center top;
 }
 .clr {
 	clear:both;
@@ -148,6 +148,7 @@ a.com span {
 	margin:0 0 12px;
 	padding:8px 24px 0;
 }
+
 .content .sidebar {
 	padding:0;
 	float:right;
@@ -348,7 +349,7 @@ ol li .send {
 	margin:6px 0;
 	padding:0;
 	float:left;
-	background:#fff url(images/search.gif) no-repeat top left;
+	background:#fff url(../images/search.gif) no-repeat top left;
 }
 #formsearch input.editbox_search {
 	margin:0;
@@ -367,7 +368,7 @@ ol li .send {
 	float:left;
 }
 
-.login{	
+.articleCenter{	
 	text-align: center;
 }
 
