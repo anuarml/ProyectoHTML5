@@ -1,5 +1,5 @@
 "use strict"
-// User object.
+// Post object.
 var post;
 
 function Post(obj){
@@ -13,6 +13,7 @@ function Post(obj){
 	this.vidLink = obj.vidLink || null;
 	this.imgLink = obj.imgLink || null;
 	this.tag = obj.tag || null;
+	this.date = obj.date || null;
 }
 
 function createNewPost(){
@@ -31,7 +32,24 @@ function createNewPost(){
 	addPost(title, description, teaser, vidLink, imgLink, tag, function(){
 
 		alert('Post creado.');
-		window.location = 'inicio.html';
+
+		getPost(title, function(tx, result){
+			//alert("Obteniendo..");
+			if(result.rows.length){
+				post = new Post(result.rows.item(0));
+				//console.log(post);
+				storage.saveItem('post',post);
+				window.location = 'postIndividual.html';
+			}
+			else{
+				alert('El post no se guardo.');
+			}
+		}, function(tx, error){
+			// Mensaje de error al acceder a la base de datos.
+			alert(error.message);
+		});
+
+		
 
 	}, function(t, e){
 		// Mensajes de error al acceder a la base de datos.

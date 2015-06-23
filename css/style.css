@@ -377,3 +377,12 @@ ol li .send {
 	margin-right: 40px;
 }
 
+#postImage{
+	width: 500px;
+	height: 250px;
+}
+
+#postVideo{
+	width: 500px;
+	height: 250px;
+}

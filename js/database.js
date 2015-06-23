@@ -18,6 +18,7 @@ if(!db){
 (function createTables(){
 
     db.transaction(function (tx) {
+        //tx.executeSql('DROP TABLE '+TABLE_USERS);
 
     	tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_USERS+' ('+
 			'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
@@ -39,11 +40,15 @@ if(!db){
             'date DATETIME NOT NULL DEFAULT (datetime(\'now\',\'localtime\')))'
         );
 
+        //tx.executeSql('DROP TABLE '+TABLE_COMMENTS);
+
         tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_COMMENTS+' ('+
             'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
             'idPost INTEGER NOT NULL,'+
-            'idUser INTEGER NOT NULL,'+
-            'comment VARCHAR(100) NOT NULL)'
+            'name VARCHAR(30) NOT NULL,'+
+            'email VARCHAR(100) NOT NULL,'+
+            'comment VARCHAR(250) NOT NULL,'+
+            'date DATETIME NOT NULL DEFAULT (datetime(\'now\',\'localtime\')))'
         );
 
     });            
@@ -74,5 +79,19 @@ function getPost(title, callback, failCallback){
 function addPost(title, description, teaser, vidLink, imgLink, tag, callback, failCallback){
     db.transaction(function (tx) {
         tx.executeSql("INSERT INTO "+TABLE_POSTS+" (title, description, teaser, vidLink, imgLink, tag) VALUES (?,?,?,?,?,?)", [title, description, teaser, vidLink, imgLink, tag], callback, failCallback);
+    });     
+}
+
+// Obtiene los comentarios de un post de la base de datos.
+function getComments(idPost, callback, failCallback){
+    db.readTransaction(function (tx) {
+        tx.executeSql("SELECT * FROM "+TABLE_COMMENTS+" WHERE idPost=?", [idPost], callback, failCallback);
+    });     
+}
+
+// Agrega un nuevo comentario al post en la base de datos.
+function addComment(idPost, name, email, comment, callback, failCallback){
+    db.transaction(function (tx) {
+        tx.executeSql("INSERT INTO "+TABLE_COMMENTS+" (idPost, name, email, comment) VALUES (?,?,?,?)", [idPost, name, email, comment], callback, failCallback);
     });     
 }
