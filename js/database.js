@@ -18,8 +18,8 @@ if(!db){
 (function createTables(){
 
     db.transaction(function (tx) {
-        
         //tx.executeSql('DROP TABLE '+TABLE_USERS);
+
     	tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_USERS+' ('+
 			'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
 			'userName VARCHAR(30) NOT NULL UNIQUE,'+
@@ -41,6 +41,7 @@ if(!db){
         );
 
         //tx.executeSql('DROP TABLE '+TABLE_COMMENTS);
+
         tx.executeSql('CREATE TABLE IF NOT EXISTS '+TABLE_COMMENTS+' ('+
             'id INTEGER PRIMARY KEY AUTOINCREMENT,'+
             'idPost INTEGER NOT NULL,'+
@@ -67,32 +68,11 @@ function addUser(userName, password, name, lastName, email, callback, failCallba
     });     
 }
 
-// Obtiene un post de la base de datos de acuerdo al titulo.
+// Obtiene un post de la base de datos.
 function getPost(title, callback, failCallback){
     db.readTransaction(function (tx) {
         tx.executeSql("SELECT * FROM "+TABLE_POSTS+" WHERE title=?", [title], callback, failCallback);
     });     
-}
-
-// Obtiene un post de la base de datos de acuerdo al id.
-function getPostById(id, callback, failCallback){
-    db.readTransaction(function (tx) {
-        tx.executeSql("SELECT * FROM "+TABLE_POSTS+" WHERE id=?", [id], callback, failCallback);
-    });     
-}
-
-//Obtiene todos los posts de la base de datos
-function getPosts(callback, failCallback){
-    db.readTransaction(function (tx) {
-        tx.executeSql("SELECT * FROM "+TABLE_POSTS +" ORDER BY date DESC", [], callback, failCallback);
-    });
-}
-
-//Obtiene todos los posts de la base de datos
-function getPostsASC(callback, failCallback){
-    db.readTransaction(function (tx) {
-        tx.executeSql("SELECT * FROM "+TABLE_POSTS +" ORDER BY date ASC LIMIT 5", [], callback, failCallback);
-    });
 }
 
 // Agrega un nuevo post en la base de datos.
