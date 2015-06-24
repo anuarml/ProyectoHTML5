@@ -21,7 +21,7 @@ $(document).ready(function(){
 		linkPart = linkPart[1].split('=');
 		var secondPart = linkPart[1];
 		//console.log(firstPart + " " + secondPart);
-		videolnk = firstPart + "embed/" + secondPart;
+		videolnk = firstPart + "embed/" + secondPart + "?autoplay=1";
 		//console.log(videolnk);
 		$("#postVideo").attr("src",videolnk);
 		//$("#postVideo")[0].load();
@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 	getComments(postStorage.id, function(tx, result){
 		//alert("Obteniendo..");
-		console.log(result.rows.item(0));
+		//console.log(result.rows.item(0));
 		if(result.rows.length){
 			
 			for (var i = 0; i < result.rows.length; i++) {
