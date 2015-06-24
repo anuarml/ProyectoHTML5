@@ -98,7 +98,7 @@ function getPostsASC(callback, failCallback){
 //Obtiene todos los posts de la base de datos de acuerdo a la busqueda
 function getSearchedPosts(searched, callback, failCallback){
     db.readTransaction(function (tx) {
-        tx.executeSql("SELECT * FROM "+TABLE_POSTS +" WHERE title LIKE ? OR tag LIKE ?", [searched,searched], callback, failCallback);
+        tx.executeSql("SELECT * FROM "+TABLE_POSTS +" WHERE title LIKE ? OR tag LIKE ?", ['%'+searched+'%','%'+searched+'%'], callback, failCallback);
     });
 }
 
