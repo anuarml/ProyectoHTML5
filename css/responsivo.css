@@ -5,12 +5,12 @@ MEDIA QUERIES
 *************************************************************************************/
 /* para 980px o menos */
 @media screen and (max-width: 980px) {
-  
+ 
   #pagewrap {
-    width: 94%;
+    width: 98%;
   }
   #content {
-    width: 65%;
+    width: 75%;
   }
   #sidebar {
     width: 30%;
