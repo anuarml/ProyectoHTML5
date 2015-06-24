@@ -372,6 +372,14 @@ ol li .send {
 	text-align: center;
 }
 
+.articleIndex{
+	margin:0 0 12px;
+	padding:8px 24px 60px;
+	width: 40%;
+	height: 190px;
+	float: right;
+}
+
 #linkSesion{
 	float: right;
 	margin-right: 40px;
