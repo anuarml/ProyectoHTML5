@@ -88,10 +88,17 @@ function getPosts(callback, failCallback){
     });
 }
 
-//Obtiene todos los posts de la base de datos
+//Obtiene todos los posts de la base de datos de forma ascendente
 function getPostsASC(callback, failCallback){
     db.readTransaction(function (tx) {
         tx.executeSql("SELECT * FROM "+TABLE_POSTS +" ORDER BY date ASC LIMIT 5", [], callback, failCallback);
+    });
+}
+
+//Obtiene todos los posts de la base de datos de acuerdo a la busqueda
+function getSearchedPosts(searched, callback, failCallback){
+    db.readTransaction(function (tx) {
+        tx.executeSql("SELECT * FROM "+TABLE_POSTS +" WHERE title LIKE ? OR tag LIKE ?", [searched,searched], callback, failCallback);
     });
 }
 
@@ -115,3 +122,4 @@ function addComment(idPost, name, email, comment, callback, failCallback){
         tx.executeSql("INSERT INTO "+TABLE_COMMENTS+" (idPost, name, email, comment) VALUES (?,?,?,?)", [idPost, name, email, comment], callback, failCallback);
     });     
 }
+

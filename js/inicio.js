@@ -6,7 +6,7 @@ function loadPosts(){
 	getPosts(function(tx, result){
 		//alert("Obteniendo..");
 		//alert("hola");
-		console.log(result.rows);
+		//console.log(result.rows);
 		if(result.rows.length){
 			//console.log("entro");
 			for (var i = 0; i < result.rows.length; i++) {
